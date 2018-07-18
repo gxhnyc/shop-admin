@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--    namespace对应Mapper接口名                -->
+  <mapper namespace="shopadmin.mapper.OperatorMapper">
+  		<!-- 	    id对应Mapper方法名 -->
+  		<select id="userNameExist" resultType="Integer">
+  			select count(*) from operators where username=#{username}
+  		</select>
+  		<select id="findAll" resultType="Operator">
+  			select O_ID id,USERNAME, PASSWORD, role_id, DISABLED ,email from OPERATORS order by id desc
+  		</select>
+  		<select id="findOne" resultMap="OperatorMap">
+  			<!-- select O_ID id,USERNAME, PASSWORD, role_id, DISABLED,email from OPERATORS
+  				where O_ID=#{id} -->
+  				
+  		   select o.o_id,o.username,o.password,o.disabled,o.email,
+                     r.role_id,r.role_name,r.role_desc,
+                     l.limits_id,l.limits_name,l.limits_desc
+           from operators o 
+           inner join role r on o.role_id=r.role_id
+           left join rolelimits rl on r.role_id=rl.role_id
+           left join limits l on rl.limits_id=l.limits_id
+  				where o.o_id=#{id}
+  				
+  				
+  		</select>
+  		<select id="findOneByUsername" resultMap="OperatorMap">
+  			select o.o_id,o.username,o.password,o.disabled,o.email,
+                     r.role_id,r.role_name,r.role_desc,
+                     l.limits_id,l.limits_name,l.limits_desc
+           from operators o 
+           inner join role r on o.role_id=r.role_id
+           left join rolelimits rl on r.role_id=rl.role_id
+           left join limits l on rl.limits_id=l.limits_id
+           where o.username=#{username}
+  		</select>
+  		<resultMap type="Operator" id="OperatorMap">
+  			<id column="o_id" property="id"/>
+  			<result column="username" property="username"/>
+  			<result column="password" property="password"/>
+  			<result column="disabled" property="disabled"/>
+  			<result column="email" property="email"/>
+  			<association property="role" javaType="Role">
+  				<id column="role_id" property="role_id"/>
+  				<result column="role_name" property="role_name"/>
+  				<result column="role_desc" property="role_desc"/>
+  				<collection property="limits" ofType="Limits">
+  					<id column="limits_id" property="limits_id"/>
+  					<result column="limits_name" property="limits_name"/>
+  					<result column="limits_desc" property="limits_desc"/>
+  				</collection>
+  			</association>
+  		
+  		</resultMap>
+  		
+  		<!-- 	useGeneratedKeys告诉Mybatis获取自动生成的主键set到pojo上 -->
+		<!-- 	keyColumn指定主键列名，keyProperty指定主键对应的pojo属性名  -->
+  		<insert id="createOne" useGeneratedKeys="true" keyColumn="o_id" keyProperty="id">
+  			insert into operators(o_id,username,password,role_id)
+  				values(operators_seq.nextval,#{username},#{password}，#{role.role_id})
+  		</insert>
+  		
+  		
+  		<delete id="deleteOne">
+  			delete from operators where o_id=#{id}
+  		</delete>
+  		
+  		
+  		<!-- 使用bind标签时，需要在mapper里@Param value属性调用时，直接使用username,无需#{} -->
+  		<select id="findByUsernameLike" resultType="Operator">
+  			<bind name="usernamepattern" value="username+'%'"/>
+  			select O_ID id,USERNAME, PASSWORD, ROLE, DISABLED from OPERATORS where username like #{usernamepattern}  		
+  		</select>
+  		
+  		<delete id="batchDelete">
+  		
+  			delete from operators where o_id in
+  				<foreach collection="list1" item="id" open="(" separator="," close=")">
+  					#{id}
+  				</foreach>
+  		</delete>
+  		
+  		<update id="batchDisable">
+  			update operators set disabled=#{disabled} where o_id in
+  			<foreach collection="list2" item="id" open="(" separator="," close=")">
+  					#{id}
+  			</foreach>  		
+  		</update>
+  		
+  		<select id="search" resultType="Operator">
+  			select O_ID,USERNAME, PASSWORD, ROLE role, DISABLED disabled from OPERATORS
+  			
+  			<where>  				
+  				<if test="username != null">
+  					<bind name="namepattern" value="'%'+username +'%'"/>
+  					username like #{namepattern}
+  				</if>
+  				<if test="role != null">
+  					<bind name="rolepattern" value="'%'+role+'%'"/>
+  					and role like #{rolepattern}
+  				</if>
+  				<if test="disabled != null">
+  					and disabled = #{disabled}
+  				</if>  			
+  			</where>
+  			
+  		
+  		</select>
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  	
+  </mapper>

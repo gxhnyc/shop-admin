@@ -21,37 +21,20 @@
 	<body>
 	<div class="header">
 	
-		<sec:authorize access="hasAnyAuthority('Limi_BOOK_RW','Limi_BOOK_RO')">
+		<sec:authorize access="hasAnyAuthority('Limi_CELLPHONE_RW','Limi_CELLPHONE_RO')">
 		<ul class="menu">
-			<li><a href="">-图书管理-</a></li>			
-			<li><a href="${contextPath }/books/">图书列表</a></li>			
-			<sec:authorize access="hasAuthority('Limi_BOOK_RW')">
-			<li><a href="${contextPath }/books/book-add">添加图书</a></li>
+			<li><a href="">-手机商城首页-</a></li>			
+			<li><a href="${contextPath }/cellphones/">手机列表</a></li>			
+			<sec:authorize access="hasAuthority('Limi_CELLPHONE_RW')">
+			<li><a href="${contextPath }/cellphones/cellphone-edit">添加手机信息</a></li>
+			</sec:authorize>
+			<sec:authorize access="hasAuthority('Limi_CELLPHONE_RW')">
+			<li><a href="${contextPath }/cellphones/cellphone-select">查询手机信息</a></li>
 			</sec:authorize>
 		</ul>
 		</sec:authorize>
 		
-		<sec:authorize access="hasAnyAuthority('Limi_AUTHOR_RW','Limi_AUTHOR_RO')">
-		<ul class="menu">
-			<li><a href="">-作者管理-</a></li>
-			<sec:authorize access="hasAnyAuthority('Limi_AUTHOR_RW','Limi_AUTHOR_RO')">
-			<li><a href="${contextPath }/authors/">作者列表</a></li>
-			</sec:authorize>
-			<sec:authorize access="hasAuthority('Limi_AUTHOR_RW')">
-			<li><a href="${contextPath }/authors/author-add">添加作者</a></li>
-			</sec:authorize>
-		</ul>
-		</sec:authorize>
 		
-		<sec:authorize access="hasAnyAuthority('Limi_PUBLISHER_RW','Limi_PUBLISHER_RO')">
-		<ul class="menu">
-			<li><a href="">-出版社管理-</a></li>
-			<li><a href="${contextPath }/publishers/">出版社列表</a></li>
-			<sec:authorize access="hasAuthority('Limi_PUBLISHER_RW')">
-			<li><a href="${contextPath }/publishers/publisher-add">添加出版社</a></li>
-			</sec:authorize>
-		</ul>
-		</sec:authorize>
 		
 		<ul class="menu">
 		<sec:authentication property="principal.username" var="o_username" scope="session"/>

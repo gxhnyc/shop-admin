@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--    namespace对应Mapper接口名  -->
+  <mapper namespace="shopadmin.mapper.CellphoneMapper">
+  		
+  		<select id="findAll" resultType="Cellphone">
+  			select  cp_id,cp_brand,cp_model,cp_os,cp_cpu,cp_ram,cp_storage,cp_color,
+  					cp_description,cp_price from cellphone
+  		</select>
+  		<select id="findByID" resultType="Cellphone">
+  			select  cp_id,cp_brand,cp_model,cp_os,cp_cpu,cp_ram,cp_storage,cp_color,
+  					cp_description,cp_price from cellphone
+  			where cp_id=#{cp_id}
+  		</select>
+  		<insert id="createOne">
+  			insert into cellphone values(
+  				   'VPN'||cellphone_id_seq.nextval||'CN',
+			       #{cp_brand},
+			       #{cp_model},
+			       #{cp_os},
+			       #{cp_cpu},
+			       #{cp_ram},
+			       #{cp_storage},
+			       #{cp_color},
+			       #{cp_description},
+			       #{cp_price}
+  			)
+  		</insert>
+  		
+  		<select id="modelExist" resultType="Integer">
+  			select count(cp_model) from cellphone where cp_model=#{cp_model}
+  		</select>
+  		
+  		<update id="updateOne">
+  			update 	cellphone set cp_brand=#{cp_brand},cp_os=#{cp_os},cp_cpu=#{cp_cpu},cp_ram=#{cp_ram} ,
+  					cp_storage=#{cp_storage} ,cp_color=#{cp_color} ,cp_description=#{cp_description},
+  					cp_price=#{cp_price}
+  			where cp_id=#{cp_id}
+  			
+  		</update>
+  		
+  		<delete id="deleteOne">
+  			delete from cellphone where cp_id=#{cp_id}
+  		</delete>
+  		
+  		<select id="fuzzyQuery" resultMap="cellphoneFrom">
+			
+			Select * from cellphone
+				<where>
+					<if test="cellphoneFrom.cp_id()!=null||!cellphone.cp_id().equals('')">
+						cp_id=#{cp_id}
+					</if>
+					<if test="cellphoneFrom.cp_brand!=null||!cellphoneFrom.cp_brand.equals('')">
+					<bind name="brandpattern" value="%+cp_brand+%"></bind>
+						cp_brand like #{brandpattern}
+					</if>
+					<if test="cellphoneFrom.cp_model!=null||!cellphoneFrom.cp_model.equals('')">
+					<bind name="modelpattern" value="%+cp_model+%"></bind>
+					cp_model like #{modelpattern}
+					</if>
+					<if test="cellphoneFrom.cp_os!=null||!cellphoneFrom.cp_os.equals('')">
+					<bind name="ospattern" value="%+cp_os+%"></bind>
+					cp_os like #{ospattern}
+					</if>
+					<if test="cellphoneFrom.cp_cpu!=null||!cellphoneFrom.cp_cpu.equals('')">
+					<bind name="cpupattern" value="%+cp_cpu+%"></bind>
+					cp_cpu like #{cpupattern}
+					</if>
+					<if test="cellphoneFrom.getCp_id()!=null||!cellphone.getCp_id().equals('')">
+					<bind name="brandpattern" value="%+cp_brand+%"></bind>
+					cp_brand like #{brandpattern}
+					</if>
+					<if test="cellphoneFrom.getCp_id()!=null||!cellphoneFrom.getCp_id().equals('')">
+					<bind name="brandpattern" value="%+cp_brand+%"></bind>
+					cp_brand like #{brandpattern}
+					</if>
+				</where>
+	</select>
+  		
+  		<resultMap type="cellphone" id="cellphoneFrom"></resultMap>
+  		
+  </mapper>

@@ -3,7 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
-	<display-name>spring-test</display-name>
+	<display-name>shop-admin</display-name>
 	
 	<!-- 在会话创建或者销毁的时候通知springsecurity，以维护SessionRegistry -->
   <listener>
@@ -39,8 +39,11 @@
 		</init-param>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>springmvc.test.config.AppConfig</param-value>
+			<param-value>shopadmin.config.AppConfig</param-value>			
 		</init-param>
+		
+		<!--  <load-on-startup>1</load-on-startup> -->
+		
 	</servlet>
 
 	<servlet-mapping>
