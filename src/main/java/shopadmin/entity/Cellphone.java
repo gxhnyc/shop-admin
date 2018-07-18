@@ -1,12 +1,13 @@
 package shopadmin.entity;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class Cellphone {
 	private String cp_id;
 	
-	@Size(min=2,max=128)
+	@NotEmpty(message="必填")
 	private String cp_brand;
 	@Size(min=2,max=128)
 	private String cp_model;
@@ -14,10 +15,11 @@ public class Cellphone {
 	private String cp_os;
 	@Size(min=2,max=128)
 	private String cp_cpu;
-	@Min(1024)
-	private Integer cp_ram;//以M为单位
-	@Min(1024)
-	private Integer cp_storage;//以M为单位
+	private Integer cp_cpu_cores;//cpu内核数量cp_cpu_cores
+	@Min(1)
+	private Integer cp_ram;//以G为单位
+	@Min(2)
+	private Integer cp_storage;//以G为单位
 	@Size(min=2,max=128)
 	private String cp_color;
 	@Size(max=1024)
@@ -84,5 +86,13 @@ public class Cellphone {
 	public void setCp_price(Integer cp_price) {
 		this.cp_price = cp_price;
 	}
+	public Integer getCp_cpu_cores() {
+		return cp_cpu_cores;
+	}
+	public void setCp_cpu_cores(Integer cp_cpu_cores) {
+		this.cp_cpu_cores = cp_cpu_cores;
+	}
+	
+	
 	
 }

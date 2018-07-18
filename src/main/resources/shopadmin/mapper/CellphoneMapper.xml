@@ -8,11 +8,11 @@
   <mapper namespace="shopadmin.mapper.CellphoneMapper">
   		
   		<select id="findAll" resultType="Cellphone">
-  			select  cp_id,cp_brand,cp_model,cp_os,cp_cpu,cp_ram,cp_storage,cp_color,
+  			select  cp_id,cp_brand,cp_model,cp_os,cp_cpu,cp_cpu_cores,cp_ram,cp_storage,cp_color,
   					cp_description,cp_price from cellphone
   		</select>
   		<select id="findByID" resultType="Cellphone">
-  			select  cp_id,cp_brand,cp_model,cp_os,cp_cpu,cp_ram,cp_storage,cp_color,
+  			select  cp_id,cp_brand,cp_model,cp_os,cp_cpu,cp_cpu_cores,cp_ram,cp_storage,cp_color,
   					cp_description,cp_price from cellphone
   			where cp_id=#{cp_id}
   		</select>
@@ -23,6 +23,7 @@
 			       #{cp_model},
 			       #{cp_os},
 			       #{cp_cpu},
+			       #{cp_cpu_cores},
 			       #{cp_ram},
 			       #{cp_storage},
 			       #{cp_color},
@@ -36,7 +37,7 @@
   		</select>
   		
   		<update id="updateOne">
-  			update 	cellphone set cp_brand=#{cp_brand},cp_os=#{cp_os},cp_cpu=#{cp_cpu},cp_ram=#{cp_ram} ,
+  			update 	cellphone set cp_brand=#{cp_brand},cp_os=#{cp_os},cp_cpu=#{cp_cpu},cp_cpu=#{cp_cpu_cores},cp_ram=#{cp_ram} ,
   					cp_storage=#{cp_storage} ,cp_color=#{cp_color} ,cp_description=#{cp_description},
   					cp_price=#{cp_price}
   			where cp_id=#{cp_id}
@@ -47,7 +48,7 @@
   			delete from cellphone where cp_id=#{cp_id}
   		</delete>
   		
-  		<select id="fuzzyQuery" resultMap="cellphoneFrom">
+  		<!-- <select id="fuzzyQuery" resultMap="cellphoneFrom">
 			
 			Select * from cellphone
 				<where>
@@ -79,8 +80,8 @@
 					cp_brand like #{brandpattern}
 					</if>
 				</where>
-	</select>
+	</select> 
   		
-  		<resultMap type="cellphone" id="cellphoneFrom"></resultMap>
+  		<resultMap type="cellphone" id="cellphoneFrom"></resultMap>-->
   		
   </mapper>

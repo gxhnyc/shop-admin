@@ -6,12 +6,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%-- 调用布局，内容将插入布局的content区域 --%>
-<t:layout title="手机查询">
-	
-	<h2>${title}</h2>
-	
+<t:layout title="手机查询">	
 			<fieldset>
-				<legend>${title}121</legend>
+				<legend><h4>手机查询</h4></legend>
 				<!--action为空意味着会提交到当前表单页面的路径-->
 				<form:form action="" method="post" commandName="cellphone">
 				<div>
@@ -39,11 +36,11 @@
 				</div>
 				<div>
 					<label for="cp_ram">运行内存：</label>
-					<form:input type="text" path="cp_ram" id="cp_ram"/>MB
+					<form:input type="text" path="cp_ram" id="cp_ram"/>GB
 				</div>
 				<div>
 					<label for="cp_storage">存储容量：</label>
-					<form:input type="text" path="cp_storage" id="cp_storage"/>MB
+					<form:input type="text" path="cp_storage" id="cp_storage"/>GB
 				</div>
 				<div>
 					<label for="cp_color">手机颜色：</label>

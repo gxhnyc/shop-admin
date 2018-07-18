@@ -1,6 +1,8 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <!-- 调用该tag时还需传参title以指定页面标题 -->
 <%@ attribute name="title" required="true"%>
+<%@ attribute name="css" fragment="true" %><!-- fragment设为true意味着该参数的值是标记片段 -->
+<%@ attribute name="js" fragment="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -11,7 +13,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		
 		<title>${title}</title>
-		<link href="${contextPath}/assets/css/add-error.css" rel="stylesheet">
+		<jsp:invoke fragment="css"></jsp:invoke>
 		<style>
 			.menu {
 				display: inline-block;
@@ -55,7 +57,7 @@
 			 <!-- springsecurity默认的退出路径是：POST /logout，注意：springsecurity自带处理 -->
 				<form action="${contextPath }/logout" method="post">
 					<sec:csrfInput/>
-					<button type="submit">退出</button>
+					<button type="submit">注销</button>
 				</form>
 			</li>
 		</ul>
@@ -70,6 +72,7 @@
 	<hr>
 	<div class="footer">
 		copyright@ 2018
+		<jsp:invoke fragment="js"></jsp:invoke>
 	</div>
 	
 	

@@ -118,6 +118,9 @@ public class CellphoneController {
 	@RequestMapping(method=RequestMethod.GET,value="/cellphones/")
 	public String list(Model model) {
 		List<Cellphone> cellphones=cellphoneService.findAll();
+		for(Cellphone c:cellphones) {
+			System.out.println(c.toString());
+		}
 		model.addAttribute("cellphones", cellphones);		
 		return "cellphone-list";		
 	}

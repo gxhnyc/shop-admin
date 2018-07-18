@@ -22,10 +22,16 @@
 					【操作系统：${cellphone.cp_os }】
 				</li>
 				<li>
-					【运行内存：${cellphone.cp_ram/1024}GB】
+					【CPU 型号：${cellphone.cp_cpu }】
 				</li>
 				<li>
-					【存储容量：${cellphone.cp_storage/1024}GB】
+					【CPU内核数：${cellphone.cp_cpu_cores }】
+				</li>
+				<li>
+					【运行内存：${cellphone.cp_ram}GB】
+				</li>
+				<li>
+					【存储容量：${cellphone.cp_storage}GB】
 				</li>
 				<li>
 					【手机颜色：${cellphone.cp_color}】
