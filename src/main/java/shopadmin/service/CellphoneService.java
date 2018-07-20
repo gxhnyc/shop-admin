@@ -65,10 +65,10 @@ public interface CellphoneService {
 	public void updateOne(Cellphone cellphone);
 	/**
 	 * 模糊查询
-	 * @param cellphoneForm
+	 * @param cellphone
 	 * @return
 	 */
-	public List<Cellphone> fuzzyQuery(CellphoneForm cellphoneForm);
+	public List<Cellphone> fuzzyQuery(Cellphone cellphone);
 	
 	
 }

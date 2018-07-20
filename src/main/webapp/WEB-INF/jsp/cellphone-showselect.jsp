@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CellPhone-Details</title>
+<title>CellPhone-showSelect</title>
 <link href="${contextPath}/assets/css/add-error.css" rel="stylesheet">
 </head>
 <body>
-	<h2>CellPhone-Details</h2>
+	<h2>CellPhone-showSelect</h2>
 	
-		
+		<c:forEach items="${cellphones}" var="cellphone">
 			<ul>
 				<li>${cellphone.cp_id}-【品牌：${cellphone.cp_brand }】-
 					<a href="${contextPath }/cellphones/cellphone-details/${cellphone.cp_id}">
@@ -22,10 +22,10 @@
 					【操作系统：${cellphone.cp_os }】
 				</li>
 				<li>
-					【运行内存：${cellphone.cp_ram/1024}GB】
+					【运行内存：${cellphone.cp_ram}GB】
 				</li>
 				<li>
-					【存储容量：${cellphone.cp_storage/1024}GB】
+					【存储容量：${cellphone.cp_storage}GB】
 				</li>
 				<li>
 					【手机颜色：${cellphone.cp_color}】
@@ -41,7 +41,7 @@
 				</li>
 			</ul>
 		
-	
+	</c:forEach>
 </body>
 
 

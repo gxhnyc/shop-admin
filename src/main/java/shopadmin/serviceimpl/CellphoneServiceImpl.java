@@ -80,9 +80,9 @@ public class CellphoneServiceImpl implements CellphoneService {
 	}
 
 	@Override
-	public List<Cellphone> fuzzyQuery(CellphoneForm cellphoneForm) {
+	public List<Cellphone> fuzzyQuery(Cellphone cellphone) {
 		// 模糊查询
-		return cellphoneMapper.fuzzyQuery(cellphoneForm);
+		return cellphoneMapper.fuzzyQuery(cellphone);
 	}
 
 }

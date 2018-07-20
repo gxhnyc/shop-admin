@@ -48,40 +48,39 @@
   			delete from cellphone where cp_id=#{cp_id}
   		</delete>
   		
-  		<!-- <select id="fuzzyQuery" resultMap="cellphoneFrom">
+  		<select id="fuzzyQuery" resultType="Cellphone">
 			
 			Select * from cellphone
 				<where>
-					<if test="cellphoneFrom.cp_id()!=null||!cellphone.cp_id().equals('')">
+					<if test="cp_id!=null||!cp_id!=''">
 						cp_id=#{cp_id}
 					</if>
-					<if test="cellphoneFrom.cp_brand!=null||!cellphoneFrom.cp_brand.equals('')">
-					<bind name="brandpattern" value="%+cp_brand+%"></bind>
-						cp_brand like #{brandpattern}
+					
+					<if test="cp_brand!=null||!cp_brand!=''">
+						<bind name="brandpattern" value="'%'+cp_brand+'%'"></bind>
+						  or cp_brand like #{brandpattern}
 					</if>
-					<if test="cellphoneFrom.cp_model!=null||!cellphoneFrom.cp_model.equals('')">
-					<bind name="modelpattern" value="%+cp_model+%"></bind>
-					cp_model like #{modelpattern}
+					
+					<if test="cp_model!=null||!cp_model!=''">
+						<bind name="modelpattern" value="'%'+cp_model+'%'"></bind>
+						or cp_model like #{modelpattern}
 					</if>
-					<if test="cellphoneFrom.cp_os!=null||!cellphoneFrom.cp_os.equals('')">
-					<bind name="ospattern" value="%+cp_os+%"></bind>
-					cp_os like #{ospattern}
+					
+					<if test="cp_os!=null||!cp_os!=''">
+						<bind name="ospattern" value="'%'+cp_os+'%'"></bind>
+						or cp_os like #{ospattern}
 					</if>
-					<if test="cellphoneFrom.cp_cpu!=null||!cellphoneFrom.cp_cpu.equals('')">
-					<bind name="cpupattern" value="%+cp_cpu+%"></bind>
-					cp_cpu like #{cpupattern}
+					
+					<if test="cp_cpu!=null||!cp_cpu!=''">
+						<bind name="cpupattern" value="'%'+cp_cpu+'%'"></bind>
+						or cp_cpu like #{cpupattern}
 					</if>
-					<if test="cellphoneFrom.getCp_id()!=null||!cellphone.getCp_id().equals('')">
-					<bind name="brandpattern" value="%+cp_brand+%"></bind>
-					cp_brand like #{brandpattern}
-					</if>
-					<if test="cellphoneFrom.getCp_id()!=null||!cellphoneFrom.getCp_id().equals('')">
-					<bind name="brandpattern" value="%+cp_brand+%"></bind>
-					cp_brand like #{brandpattern}
-					</if>
+					<!-- <if test="cp_cpu_cores!=null||!cp_cpu_cores!=''">
+						or cp_cpu_cores=#{cp_cpu_cores}
+					</if> -->
+					
 				</where>
 	</select> 
   		
-  		<resultMap type="cellphone" id="cellphoneFrom"></resultMap>-->
   		
   </mapper>

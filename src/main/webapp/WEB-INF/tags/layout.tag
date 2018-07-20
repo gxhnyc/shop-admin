@@ -33,14 +33,39 @@
 			<sec:authorize access="hasAuthority('Limi_CELLPHONE_RW')">
 			<li><a href="${contextPath }/cellphones/cellphone-select">查询手机信息</a></li>
 			</sec:authorize>
+			<sec:authorize access="hasAuthority('Limi_CELLPHONE_RW')">
+			<li><a href="${contextPath }/customer-list">查询顾客会员信息</a></li>
+			</sec:authorize>
 		</ul>
 		</sec:authorize>
 		
 		
 		
+		<sec:authorize access="isAnonymous()">
+		<%-- <sec:authentication property="principal.username" var="o_username" scope="session"/>
+		<sec:authentication property="principal.operator.email" var="o_email"/> --%>
 		<ul class="menu">
+		
+			<li><a href="">您好，欢迎来来首页！</a></li>			
+			 <!-- springsecurity默认的退出路径是：POST /logout，注意：springsecurity自带处理 -->
+			<li>	
+				<form action="${contextPath }/login" method="post">
+					<sec:csrfInput/>
+					<button type="submit">登录</button>
+				</form>
+			</li>
+			<li>	
+				<form action="${contextPath }/login" method="post">
+					<sec:csrfInput/>
+					<button type="submit">注册</button>
+				</form>
+			</li>
+		</ul>
+		</sec:authorize>
+		<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal.username" var="o_username" scope="session"/>
 		<sec:authentication property="principal.operator.email" var="o_email"/>
+		<ul class="menu">		
 			<li><a href="">--当前用户--</a></li>
 			<!--  principal属性可以拿到当前登录的用户详情（UserDetailsImpl） -->
 			<li>用户名：<a href="">【${o_username }】</a></li>			
@@ -61,6 +86,9 @@
 				</form>
 			</li>
 		</ul>
+		</sec:authorize>
+		
+		
 	</div>
 	<hr>
 	<div class="content">

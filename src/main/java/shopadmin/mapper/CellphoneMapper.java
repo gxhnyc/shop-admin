@@ -64,9 +64,9 @@ public interface CellphoneMapper {
 		public void deleteOne(String id);
 		/**
 		 * 模糊查询
-		 * @param cellphoneForm
+		 * @param cellphone
 		 * @return
 		 */
-		public List<Cellphone> fuzzyQuery(CellphoneForm cellphoneForm);
+		public List<Cellphone> fuzzyQuery(Cellphone cellphone);
 		
 }

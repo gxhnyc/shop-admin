@@ -119,7 +119,7 @@ public class CellphoneController {
 	public String list(Model model) {
 		List<Cellphone> cellphones=cellphoneService.findAll();
 		for(Cellphone c:cellphones) {
-			System.out.println(c.toString());
+			System.out.println(c.toString()+"---------");
 		}
 		model.addAttribute("cellphones", cellphones);		
 		return "cellphone-list";		
@@ -139,26 +139,38 @@ public class CellphoneController {
 	//------------------------------------模糊查询-------------------------
 	@RequestMapping(method=RequestMethod.GET,value="/cellphones/cellphone-select")
 	public String selectget(@ModelAttribute Cellphone cellphone,Model model) {
-		model.addAttribute("cellphone", cellphone);
+		/*model.addAttribute("cellphone", cellphone);*/
 		
 		return "cellphone-select";
 		
 	}
 	@RequestMapping(method=RequestMethod.POST,value="/cellphones/cellphone-select")
-	public String select(@ModelAttribute CellphoneForm cellphoneForm,Model model) {
+	public String select(@ModelAttribute Cellphone cellphone,Model model) {
 		
-		List<Cellphone> cellphones=cellphoneService.fuzzyQuery(cellphoneForm);
+		List<Cellphone> cellphones=cellphoneService.fuzzyQuery(cellphone);
 		
-		/*if(cellphone.getCp_id()!=null||!cellphone.getCp_id().equals("")) {
-			Cellphone cell=cellphoneService.findByID(cellphone.getCp_id());
+		model.addAttribute("cellphones", cellphones);
+		for(Cellphone cell:cellphones) {
 			System.out.println(cell.toString());
-			model.addAttribute("cellphone", cell);
-			return "cellphone-showselect";
-		}*/
-		
+		}
 		return "cellphone-select";
 		
 	}
+	/*@RequestMapping(method=RequestMethod.GET,value="/cellphones/cellphone-showselect")
+	public String showselect(@ModelAttribute Cellphone cellphone,Model model) {
+		if(cellphone==null) {
+			return "redirect:/cellphones/cellphone-select";
+		}
+		
+		List<Cellphone> cellphones=cellphoneService.fuzzyQuery(cellphone);
+		for(Cellphone cell:cellphones) {
+			System.out.println(cell.toString());
+		}
+		model.addAttribute("cellphones", cellphones);
+		return "cellphone-showselect";
+		
+	}*/
+	
 	
 	/**
 	 * 执行cellphone-add

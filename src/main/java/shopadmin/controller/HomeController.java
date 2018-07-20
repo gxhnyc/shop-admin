@@ -10,7 +10,7 @@ public class HomeController {
 	 * 首页 控制器
 	 * @return
 	 */
-	@RequestMapping(method=RequestMethod.GET,value="/index")
+	@RequestMapping(method=RequestMethod.GET,value="/")
 	public String HomeIndex() {
 		
 		return "index";
